@@ -1,27 +1,21 @@
-n = int(input())
-setoran_kas = {}
+pay_times = int(input())
+payment_data = {}
 
-for i in range(n):
-    baris = input().split()
-    nama = baris[0]
-    nominal = int(baris[1])
-
-    if nama in setoran_kas:
-        setoran_kas[nama] += nominal
+for i in range(pay_times):
+    temp = input().split() # temp is a list
+    if temp[0] not in payment_data:
+        payment_data[temp[0]] = int(temp[1])
     else:
-        setoran_kas[nama] = nominal
+        payment_data[temp[0]] += int(temp[1])
 
-total_kas = 0
-top_nama = ""
-top_nominal = -1
-
-for nama, total in setoran_kas.items():
-    print(f"{nama}: {total}")
-
-    total_kas += total
-
-    if total > top_nominal:
-        top_nominal = total
-        top_nama = nama
-print(f"Total cash: {total_kas}")
-print(f"Top contributor: {top_nama} ({top_nominal})")
+total = 0
+top_contributor = ""
+highest = 0
+for name in payment_data:
+    total += payment_data[name]
+    if payment_data[name] > highest:
+        highest = payment_data[name]
+        top_contributor = name
+    print(f"{name}: {payment_data[name]}")
+print("Total cash: ", total)
+print(f"Top contributor: {top_contributor} ({highest})")
